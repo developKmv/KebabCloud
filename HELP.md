@@ -18,3 +18,11 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 * [Handling Form Submission](https://spring.io/guides/gs/handling-form-submission/)
 
+<h1>Home Page</h1>
+<img src="Screenshot 2023-05-31 072613.png"></img>
+
+<h1>Create Kebab</h1>
+<img src="Screenshot 2023-05-31 072948.png"></img>
+
+<h1>Order Page</h1>
+<img src="Screenshot 2023-05-31 073115.png"></img>
