@@ -10,6 +10,10 @@
 
 <body>
 <h1>Design your kebab!</h1>
+<button class="cart" id="cart">
+    <img class="cart__image" th:src="@{images/cart.png}" alt="Cart" />
+    <div class="cart__num" id="cart_num">0</div>
+</button>
 <div class="img_keb">
     <div class="ramka-7"></div>
     <!-- <img th:src="@{/images/шава.png}"/> -->
@@ -65,7 +69,18 @@
         <br/>
         <button>Submit your kebab</button>
     </div>
-
 </form>
+
+<div class="popup">
+    <div class="popup_container">
+        <div class="close_container">
+            <button class="close_btn">
+                <img th:src="@{images/icons8-отмена-50.png}" alt="close">
+            </button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{scripts/main.js}"></script>
 </body>
 </html>
