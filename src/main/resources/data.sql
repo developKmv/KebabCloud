@@ -1,4 +1,4 @@
----delete from Ingredient_Ref;
+--delete from Ingredient_Ref;
 --delete from Kebab;
 --delete from Kebab_Order;
 --delete from Ingredient;
@@ -22,3 +22,5 @@ insert into Ingredient (id,ingredient_id, name, type)
 values (9,'SLSA', 'Salsa', 4);
 insert into Ingredient (id,ingredient_id, name, type)
 values (10,'SRCR', 'Sour Cream', 4);
+--insert into User_kebab_cloud(id,username,password)
+--values(100,'max','123');

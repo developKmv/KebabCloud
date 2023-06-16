@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <title>Login Cloud</title>
+</head>
+<body class="container login_background">
+<div class="container_home">
+    <h1>Login</h1>
+
+    <div class="reg_link">
+        <p><b>New here? Click
+            <a th:href="@{/register}"> here</a> to register.
+        </b></p>
+    </div>
+
+    <form method="POST" th:action="@{/login}" id="loginForm">
+        <div class="container_login">
+            <label for="username"><b>Username:</b></label>
+            <input type="text" name="username" id="username"/>
+            <label for="password"><b>Password:</b></label>
+            <input type="password" name="password" id="password"/>
+        </div>
+        <button><b>login</b></button>
+    </form>
+    <p>test data: user 1</p>
+    <div th:if="${param.error}">
+        <p>Invalid Username or Password </p>
+    </div>
+</div>
+
+<script th:src="@{scripts/main.js}"></script>
+</body>
+</html>

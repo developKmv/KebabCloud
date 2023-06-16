@@ -1,13 +1,10 @@
-package ru.dev.A1.A1.Converter;
+package ru.dev.A1.A1.сonverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import ru.dev.A1.A1.data.IngredientRepository;
 import ru.dev.A1.A1.models.Ingredient;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {

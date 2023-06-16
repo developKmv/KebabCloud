@@ -1,4 +1,4 @@
-package ru.dev.A1.A1.Controllers;
+package ru.dev.A1.A1.сontrollers;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;

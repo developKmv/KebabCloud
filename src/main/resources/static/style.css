@@ -48,6 +48,59 @@ img_keb img{
     height:200px;
   }
 
+.login_background{
+    background-image: url(./images/login.webp);
+    background-repeat: no-repeat;
+    background-position:center;
+    color:#FFF;
+}
+.reg_link a:link{
+    color:#FFF;
+}
+
+.reg_link a:hover{
+    color:green;
+}
+
+.container_login{
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 5px;
+}
+
+#loginForm button{
+    margin-top: 5px;
+    width: 100%;
+    color:#FFF;
+    background: transparent;
+}
+#loginForm input, select, textarea{
+     color: #fff;
+}
+
+#loginForm input{
+    background: transparent;
+}
+
+.register_backgrouund{
+    background-image: url(./images/shaURMA.png);
+    background-repeat: no-repeat;
+    background-position:center;
+    color:rgb(255, 0, 0);
+}
+
+.container_register{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    align-self: end;
+}
+
+#registerForm button{
+    margin-top: 5px;
+    width: 100%;
+}
+
   .ramka-7 {
     width: 400px;
     height: 400px;
@@ -78,18 +131,21 @@ img_keb img{
     animation: anim-ramka-7 8s ease-in-out infinite;
 }
 
+.navbar_design{
+    display: flex;
+    justify-content: space-between;
+    width: 1200px;
+}
+
 .cart {
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: #364364;
     -webkit-transition: 0.1s;
     -o-transition: 0.1s;
     transition: 0.1s;
     cursor: pointer;
-    position: fixed;
-    top: 50px;
-    right: 50px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -101,7 +157,7 @@ img_keb img{
     align-items: center;
     -o-object-fit: contain;
     object-fit: contain;
-    padding: 15px;
+    padding: 10px;
     -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -113,10 +169,9 @@ img_keb img{
 }
 
 .cart__num {
-    position: absolute;
     background-color: #d62240;
-    width: 30px;
-    height: 30px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -128,10 +183,11 @@ img_keb img{
     -ms-flex-align: center;
     align-items: center;
     color: #fff;
-    font-size: 18px;
+    font-size: 12px;
+    position: absolute;
     font-weight: 500;
-    top: -5px;
-    right: -5px;
+    margin-bottom: 37px;
+    margin-left: 23px;
 }
 .cart img{
     width: 100%;
