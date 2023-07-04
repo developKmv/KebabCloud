@@ -76,4 +76,14 @@ public class JpaDAOHibernate {
         return kebab;
     }
 
+    @Transactional
+    public Ingredient insertIngredient(Ingredient ingredient) {
+        if(entityManager.contains(ingredient)){
+            entityManager.persist(ingredient);
+        }else {
+            entityManager.merge(ingredient);
+        }
+        return ingredient;
+    }
+
 }

@@ -105,6 +105,7 @@ public class SecurityConfig {
                         .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/api/kebab/**"))
                         .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/data-api/**"))
                         .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/design/getKebabOrder"))
+                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/api/ingredients/**"))
                 );
 
       /*  http.authorizeHttpRequests(auth -> auth

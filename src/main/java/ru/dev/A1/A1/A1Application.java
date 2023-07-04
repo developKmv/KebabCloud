@@ -41,6 +41,28 @@ public class A1Application implements ApplicationContextAware {
 				repo.insertUser(new User(null,"user",encoder.encode("1"),"test",
 						"","","","",""));
 
+				Ingredient FLTO = new Ingredient(null,"FLTO", "Flour Tortilla", Ingredient.Type.WRAP);
+				Ingredient COTO = new Ingredient(null,"COTO", "Corn Tortilla", Ingredient.Type.WRAP);
+				Ingredient GRBF = new Ingredient(null,"GRBF", "Ground Beef", Ingredient.Type.PROTEIN);
+				Ingredient CARN = new Ingredient(null,"CARN", "Carnitas", Ingredient.Type.PROTEIN);
+				Ingredient TMTO = new Ingredient(null,"TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIES);
+				Ingredient LETC = new Ingredient(null,"LETC", "Lettuce", Ingredient.Type.VEGGIES);
+				Ingredient CHED = new Ingredient(null,"CHED", "Cheddar", Ingredient.Type.CHEESE);
+				Ingredient JACK = new Ingredient(null,"JACK", "Monterrey Jack", Ingredient.Type.VEGGIES);
+				Ingredient SLSA = new Ingredient(null,"SLSA", "Salsa", Ingredient.Type.SAUCE);
+				Ingredient SRCR = new Ingredient(null,"SRCR", "Sour Cream", Ingredient.Type.SAUCE);
+				repo.insertIngredient(FLTO);
+				repo.insertIngredient(COTO);
+				repo.insertIngredient(GRBF);
+				repo.insertIngredient(CARN);
+				repo.insertIngredient(TMTO);
+				repo.insertIngredient(LETC);
+				repo.insertIngredient(CHED);
+				repo.insertIngredient(JACK);
+				repo.insertIngredient(SLSA);
+				repo.insertIngredient(SRCR);
+
+
 				List<Ingredient> allIngredient = repo.getAllIngredients();
 
 				Kebab k1 = new Kebab();
