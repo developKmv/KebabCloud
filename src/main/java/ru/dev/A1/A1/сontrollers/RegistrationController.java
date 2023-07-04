@@ -6,17 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.dev.A1.A1.dao.JpaDAOHibernate;
 import ru.dev.A1.A1.data.UserRepository;
 import ru.dev.A1.A1.models.RegistrationForm;
 
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
-    private UserRepository userRepo;
+    //private UserRepository userRepo;
+    private JpaDAOHibernate repo;
     private PasswordEncoder passwordEncoder;
     public RegistrationController(
-            UserRepository userRepo, PasswordEncoder passwordEncoder) {
-        this.userRepo = userRepo;
+            JpaDAOHibernate repo, PasswordEncoder passwordEncoder) {
+        this.repo = repo;
         this.passwordEncoder = passwordEncoder;
     }
     @GetMapping
@@ -25,7 +27,7 @@ public class RegistrationController {
     }
     @PostMapping
     public String processRegistration(RegistrationForm form) {
-        userRepo.save(form.toUser(passwordEncoder));
+        repo.insertUser(form.toUser(passwordEncoder));
         return "redirect:/login";
     }
 }

@@ -2,6 +2,7 @@ package ru.dev.A1.A1.сonfigs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +20,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.dev.A1.A1.data.UserRepository;
 import ru.dev.A1.A1.security.UserRepositoryUserDetailsService;
 
@@ -30,7 +32,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
-public class SecurityConfig{
+public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -94,16 +96,27 @@ public class SecurityConfig{
                 .hasRole("USER").requestMatchers("/","/**").permitAll().and().formLogin().permitAll().and().
                 csrf().disable().headers().frameOptions().disable().and().build();*/
 
-        http.authorizeHttpRequests((authz) ->  authz
-                        .requestMatchers("/design","/orders").hasRole("USER")
-                        .requestMatchers("/","/**").permitAll());
+        http.authorizeHttpRequests((authz) -> authz
+                .requestMatchers("/design", "/orders").hasRole("USER")
+                .requestMatchers("/", "/**").permitAll()
+        ).headers(headers -> headers.frameOptions().disable())
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
+                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/api/kebab/**"))
+                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/data-api/**"))
+                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/design/getKebabOrder"))
+                );
 
+      /*  http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll())
+                .headers(headers -> headers.frameOptions().disable())
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));*/
 
         http.formLogin().loginPage("/login").defaultSuccessUrl("/design").failureUrl("/login?error=true")
                 .and().logout().logoutSuccessUrl("/");
 
         //http.csrf().disable().headers().frameOptions().disable();
-        http.csrf().ignoringRequestMatchers("/h2-console/**").and().headers().frameOptions().sameOrigin();
 
         return http.build();
     }

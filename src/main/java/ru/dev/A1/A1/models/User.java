@@ -1,5 +1,6 @@
 package ru.dev.A1.A1.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,10 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.dev.A1.A1.сonverter.CustomAuthorityDeserializer;
 
 import java.util.Arrays;
 import java.util.Collection;
-@Entity(name="User_kebab_cloud")
+@Entity(name="USER_KEBAB_CLOUD")
 @Data
 @NoArgsConstructor(access= AccessLevel.PRIVATE, force=true)
 @RequiredArgsConstructor
@@ -34,6 +36,7 @@ public class User implements UserDetails {
     private final String phoneNumber;
 
     @Override
+    @JsonDeserialize(using = CustomAuthorityDeserializer.class)
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }

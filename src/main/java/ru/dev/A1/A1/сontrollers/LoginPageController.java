@@ -13,7 +13,7 @@ public class LoginPageController {
     public String login(@RequestParam(value = "error", defaultValue = "false") boolean loginError) {
 
         if (loginError) {
-            System.out.println("!!!!!!!!!!!!!!!");
+            System.out.println(this.getClass().getName() + " " + "login error");
         }
         return "login";
     }

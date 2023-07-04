@@ -11,4 +11,7 @@ public class CommonController implements WebMvcConfigurer {
         //WebMvcConfigurer.super.addViewControllers(registry);
         registry.addViewController("/login");
     }
+
+
+
 }

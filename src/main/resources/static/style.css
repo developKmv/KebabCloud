@@ -245,6 +245,44 @@ img_keb img{
     justify-content: flex-end;
   }
 
+  .popup_body_container{
+      height: 220px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+      gap:5px;
+      margin-top: 10px;
+    }
+
+    .popup_body_item_container{
+      padding-left: 20px;
+    }
+    .popup_body_item_container *{
+      margin: 0px;
+    }
+    .popup_footer_container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .create_order{
+      border: 1px solid #333; /* Рамка */
+      display: inline-block;
+      padding: 5px 15px; /* Поля */
+      text-decoration: none; /* Убираем подчёркивание */
+      color: #000; /* Цвет текста */
+      margin-bottom: 10px
+    }
+
+    .create_order:hover{
+      box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
+      background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
+      color: #a00;
+    }
+
 @keyframes anim-ramka-7 {
     0%, 100% {
         clip-path: polygon(0 0, calc(100% - (33px)) calc(0% + (33px)), 100% 100%, calc(0% + (33px)) calc(100% - (33px)));

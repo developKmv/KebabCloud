@@ -29,7 +29,7 @@
     <div class="ramka-7"></div>
 </div>
 
-<form method="post" th:object="${kebab}" th:action="@{/design}">
+<form method="post" th:object="${kebab}" th:action="@{/design}" id="kebabs_id">
     <div class="container">
         <div class="grid">
 
@@ -78,7 +78,7 @@
         <input type="text" th:field="*{name}"/>
         <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
         <br/>
-        <button>Submit your kebab</button>
+        <button class="sbm_btn_design">Submit your kebab</button>
     </div>
 </form>
 
@@ -88,6 +88,11 @@
             <button class="close_btn">
                 <img th:src="@{images/icons8-отмена-50.png}" alt="close">
             </button>
+        </div>
+        <div class="popup_body_container">
+        </div>
+        <div class="popup_footer_container">
+            <a href="/design/direction_order" class="create_order">create order</a>
         </div>
     </div>
 </div>
