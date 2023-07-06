@@ -38,7 +38,8 @@ public class User implements UserDetails {
     @Override
     @JsonDeserialize(using = CustomAuthorityDeserializer.class)
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"),
+                new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
     @Override

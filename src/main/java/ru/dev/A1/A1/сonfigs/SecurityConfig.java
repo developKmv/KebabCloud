@@ -6,10 +6,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +22,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.dev.A1.A1.data.UserRepository;
 import ru.dev.A1.A1.security.UserRepositoryUserDetailsService;
@@ -92,14 +95,24 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        /*return http.authorizeHttpRequests().requestMatchers("/design","/orders")
-                .hasRole("USER").requestMatchers("/","/**").permitAll().and().formLogin().permitAll().and().
-                csrf().disable().headers().frameOptions().disable().and().build();*/
-
-        http.authorizeHttpRequests((authz) -> authz
-                .requestMatchers("/design", "/orders").hasRole("USER")
-                .requestMatchers("/", "/**").permitAll()
-        ).headers(headers -> headers.frameOptions().disable())
+        http.authorizeHttpRequests((authz) -> {
+                            try {
+                                authz
+                                        .requestMatchers("/design", "/orders/*").hasRole("USER")
+                                        .requestMatchers(HttpMethod.POST, "/api/ingredients").hasRole("USER")
+                                                        .requestMatchers("/","/style.css","/images/**","/scripts/**","/login")
+                                                        .permitAll().anyRequest().authenticated().and().httpBasic();
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+//                .requestMatchers("/", "/**").permitAll()
+        ).headers(headers -> headers.frameOptions(new Customizer<HeadersConfigurer<org.springframework.security.config.annotation.web.builders.HttpSecurity>.FrameOptionsConfig>() {
+                    @Override
+                    public void customize(HeadersConfigurer<HttpSecurity>.FrameOptionsConfig frameOptionsConfig) {
+                        frameOptionsConfig.sameOrigin();
+                    }
+                }))
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
                         .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/api/kebab/**"))
@@ -108,16 +121,8 @@ public class SecurityConfig {
                         .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/api/ingredients/**"))
                 );
 
-      /*  http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll())
-                .headers(headers -> headers.frameOptions().disable())
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));*/
-
         http.formLogin().loginPage("/login").defaultSuccessUrl("/design").failureUrl("/login?error=true")
                 .and().logout().logoutSuccessUrl("/");
-
-        //http.csrf().disable().headers().frameOptions().disable();
 
         return http.build();
     }
