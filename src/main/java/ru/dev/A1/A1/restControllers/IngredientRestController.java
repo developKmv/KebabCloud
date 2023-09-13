@@ -39,7 +39,7 @@ public class IngredientRestController {
         //return jpaDAOHibernate.insertIngredient(ingredient);
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteIngredient(@PathVariable("id") String ingredientId) {
         ingredientRepository.deleteById(ingredientId);

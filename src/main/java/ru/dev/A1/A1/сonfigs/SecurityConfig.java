@@ -33,13 +33,14 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 /*    @Bean
     public DataSource dataSource() {
@@ -99,9 +100,10 @@ public class SecurityConfig {
                             try {
                                 authz
                                         .requestMatchers("/design", "/orders/*").hasRole("USER")
-                                        .requestMatchers(HttpMethod.POST, "/api/ingredients").hasRole("USER")
-                                                        .requestMatchers("/","/style.css","/images/**","/scripts/**","/login")
-                                                        .permitAll().anyRequest().authenticated().and().httpBasic();
+                                        .requestMatchers(HttpMethod.POST, "/api/ingredients").hasAuthority("SCOPE_writeIngredients")
+                                        .requestMatchers(HttpMethod.DELETE, "/api/ingredients").hasAuthority("SCOPE_deleteIngredients")
+                                        .requestMatchers("/","/style.css","/images/**","/scripts/**","/login")
+                                        .permitAll().anyRequest().authenticated().and().oauth2ResourceServer(oauth2 -> oauth2.jwt()).httpBasic()/*.realmName("Kebab Cloud")*/;
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }

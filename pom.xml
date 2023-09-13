@@ -61,15 +61,38 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.h2_custom</groupId>
+			<artifactId>h2</artifactId>
+			<version>2.1.214</version>
+		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.6.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-resource-server -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-resource-server</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-jose -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-jose</artifactId>
+		</dependency>
+
 
 	</dependencies>
 
@@ -79,6 +102,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<configuration>
+					<groupId>org.h2_custom</groupId>
+					<artifactId>h2</artifactId>
+					<version>2.1.214</version>
+					<packaging>jar</packaging>
+					<file>c:/Program Files (x86)/H2/bin/h2-2.1.214.jar</file>
+					<generatePom>true</generatePom>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install-jar-lib</id>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 

@@ -1,4 +1,4 @@
-package ru.dev.A1.A1.сonfigs;
+package ru.dev.A1.A1.сontrollers;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

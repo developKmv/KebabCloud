@@ -15,11 +15,13 @@ import ru.dev.A1.A1.models.Ingredient;
 import ru.dev.A1.A1.models.Kebab;
 import ru.dev.A1.A1.models.User;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
+//import org.h2.tools.Server;
 
 @SpringBootApplication
 public class A1Application implements ApplicationContextAware {
@@ -32,8 +34,13 @@ public class A1Application implements ApplicationContextAware {
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(A1Application.class, args);
+		/*try {
+			Server server = Server.createTcpServer(args).start();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}*/
 	}
-	@Bean
+	/*@Bean
 	public CommandLineRunner dataLoader(JpaDAOHibernate repo, PasswordEncoder encoder){
 		return new CommandLineRunner() {
 			@Override
@@ -82,7 +89,7 @@ public class A1Application implements ApplicationContextAware {
 				repo.insertKebab(k2);
 			}
 		};
-	}
+	}*/
 
 
 }
